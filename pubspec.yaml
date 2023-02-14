@@ -39,9 +39,34 @@ dependencies:
   font_awesome_flutter: ^10.3.0
   qr_code_scanner: ^1.0.1
   pinput: ^2.2.21
+  firebase_auth: 
+  firebase_core:
+  flutter_native_splash: ^2.2.17 
+  http: ^0.13.5
+  shared_preferences: 
+  getwidget:
+  google_fonts: ^4.0.3
+  cached_network_image:
+  shimmer: ^2.0.0
+  flutter_cache_manager:
+  carousel_slider: ^4.2.1
+  flutter_svg: 
+  
+  
+  
+ 
+
+
+  
 dev_dependencies:
   flutter_test:
     sdk: flutter
+
+flutter_native_splash:
+  color : "#ffffff"
+  image : assets/images/logo.jpeg
+  android : true
+  ios : true
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is

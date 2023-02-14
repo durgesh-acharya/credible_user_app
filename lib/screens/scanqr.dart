@@ -1,4 +1,4 @@
-
+// @dart=2.9
 
 import 'dart:io';
 
@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 
 class ScanQr extends StatefulWidget {
-  const ScanQr({super.key});
+ 
   
 
   @override
@@ -17,13 +17,13 @@ class ScanQr extends StatefulWidget {
 class _ScanQrState extends State<ScanQr> {
 
   final GlobalKey qrKey = GlobalKey(debugLabel: 'qrKey');
-  QRViewController? controller;
-  Barcode? barcode;
+  QRViewController controller;
+  Barcode barcode;
 
   @override
   void dispose() {
     // TODO: implement dispose
-    controller?.dispose();
+    controller.dispose();
     super.dispose();
   }
 
@@ -32,9 +32,9 @@ class _ScanQrState extends State<ScanQr> {
     // TODO: implement reassemble
     super.reassemble();
   if(Platform.isAndroid){
-       controller!.pauseCamera();
+       controller.pauseCamera();
   }
-  controller!.resumeCamera();
+  controller.resumeCamera();
   }
   
   @override

@@ -1,28 +1,75 @@
+// @dart=2.9
 import 'package:credible_steel/screens/account.dart';
 import 'package:credible_steel/screens/product.dart';
+import 'package:credible_steel/screens/profile.dart';
 import 'package:credible_steel/screens/scanqr.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class DashBoard extends StatefulWidget {
-  const DashBoard({super.key});
+  String mobilenumber;
+  DashBoard(this.mobilenumber);
+  
 
   @override
   State<DashBoard> createState() => _DashBoardState();
 }
 
 class _DashBoardState extends State<DashBoard> {
+  
+    Future sharedpreferenceadd(String mno)async{
+    final SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    sharedPreferences.setString("mobile", mno);
+    print(mno);
+  }
+ 
+ 
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    
+    sharedpreferenceadd(widget.mobilenumber);
+   
+  }
   int index = 0;
   final screens = [
     Products(),
     ScanQr(),
-    Accounts()
+    Accounts(),
+    Profile()
   ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: screens[index],
+      appBar: AppBar(
+        centerTitle: true,
+        title: Text("Credible Steel",style: GoogleFonts.fredokaOne(color: Colors.white,fontWeight: FontWeight.bold),),
+      ),
+      body: WillPopScope(
+        onWillPop: () {
+          showDialog(
+            context: context, builder: ((context) {
+              return AlertDialog(
+    title: Text("Are You Sure Want to Exit ??"),
+    content: Text(""),
+    actions: [
+      TextButton(onPressed: (){
+        SystemNavigator.pop();
+      }, child: Text("Yes")),
+      TextButton(onPressed: (){
+        Navigator.pop(context);
+      }, child: Text("No")),
+    ],
+  );;
+            }));
+        },
+        child: screens[index]),
       bottomNavigationBar: NavigationBarTheme(
         data: NavigationBarThemeData(
           
@@ -39,9 +86,10 @@ class _DashBoardState extends State<DashBoard> {
             this.index = index;
           })),
           destinations: [
-          NavigationDestination(icon: FaIcon(FontAwesomeIcons.cartShopping,color: index == 0 ? Colors.green : Colors.grey),label: '',),
+          NavigationDestination(icon: FaIcon(FontAwesomeIcons.list,color: index == 0 ? Colors.green : Colors.grey),label: '',),
           NavigationDestination(icon: FaIcon(FontAwesomeIcons.qrcode,color:index == 1 ? Colors.green : Colors.grey),label: '',),
-          NavigationDestination(icon: FaIcon(FontAwesomeIcons.history,color: index == 2 ? Colors.green : Colors.grey), label: ''),
+          NavigationDestination(icon: FaIcon(FontAwesomeIcons.indianRupeeSign,color: index == 2 ? Colors.green : Colors.grey), label: ''),
+           NavigationDestination(icon: FaIcon(FontAwesomeIcons.user,color: index == 3 ? Colors.green : Colors.grey), label: ''),
         ]),
       ),
     );

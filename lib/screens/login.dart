@@ -1,18 +1,21 @@
+// @dart=2.9
 import 'package:credible_steel/screens/otp.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
 class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
+ 
 
   @override
   State<LoginScreen> createState() => _LoginScreenState();
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  TextEditingController? _mobilecontroller ;
+  TextEditingController _mobilecontroller = TextEditingController();
   Color color = Colors.green;
 
-  Widget mobilenumber(){
+  Widget mobilenumber(textcontroller){
     return  Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
@@ -46,11 +49,11 @@ class _LoginScreenState extends State<LoginScreen> {
                             // ),
                             child :Container(
                               alignment: Alignment.center,
-                              child: Text("+91",style: TextStyle(fontSize: 16.0,color: Colors.lightGreen),))
+                              child: Text("+91",style: TextStyle(fontSize: 16.0,color: Colors.green),))
                           ),
                           Text(
                             "|",
-                            style: TextStyle(fontSize: 33, color: Colors.lightGreen),
+                            style: TextStyle(fontSize: 33, color: Colors.green),
                           ),
                           SizedBox(
                             width: 10,
@@ -58,7 +61,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           Expanded(
                               child: TextField(
                                 maxLength: 10,
-                                controller: _mobilecontroller,
+                                controller: textcontroller,
                             keyboardType: TextInputType.phone,
                             decoration: InputDecoration(
                               border: InputBorder.none,
@@ -82,7 +85,7 @@ class _LoginScreenState extends State<LoginScreen> {
         onPressed: () {
           Navigator.pushReplacement(
     context,
-    MaterialPageRoute(builder: (context) =>  OTPScreen(_mobilecontroller!.text)));
+    MaterialPageRoute(builder: (context) =>  OTPScreen(_mobilecontroller.text)));
         },
    
   ),
@@ -104,9 +107,11 @@ class _LoginScreenState extends State<LoginScreen> {
         height: MediaQuery.of(context).size.height,
         color: Colors.white10,
         alignment: Alignment.center,
-        child: mobilenumber()
+        child: mobilenumber(_mobilecontroller)
 ),
       ),
     );
   }
+
+ 
 }

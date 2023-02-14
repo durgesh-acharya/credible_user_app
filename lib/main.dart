@@ -1,14 +1,26 @@
+// @dart=2.9
 import 'package:credible_steel/screens/dashboard.dart';
 import 'package:credible_steel/screens/login.dart';
 import 'package:credible_steel/screens/signup.dart';
+import 'package:credible_steel/screens/splash.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-void main() {
-  runApp(const MyApp());
+
+void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+
+
+  
+  runApp(MyApp());
 }
 
+
+
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  
 
   // This widget is the root of your application.
   @override
@@ -26,9 +38,9 @@ class MyApp extends StatelessWidget {
         // or simply save your changes to "hot reload" in a Flutter IDE).
         // Notice that the counter didn't reset back to zero; the application
         // is not restarted.
-        primarySwatch: Colors.lightGreen,
+        primarySwatch: Colors.green,
       ),
-      home: const LoginScreen(),
+      home: Splash()
     );
   }
 }
