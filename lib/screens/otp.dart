@@ -80,13 +80,13 @@ class _OTPScreenState extends State<OTPScreen> {
 
                           }catch(e){
                             _dialogBuilder(context);
-                           FocusScope.of(context).unfocus();
+                          
                               print(e);
                           }
                         }else if(credential == null){
                           print("invalid otp");
                           _dialogBuilder(context);
-                           FocusScope.of(context).unfocus();
+                     
                         }
                       }catch(e){
                         print(e);

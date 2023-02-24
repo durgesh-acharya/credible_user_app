@@ -23,8 +23,10 @@ class _ScanQrState extends State<ScanQr> {
   @override
   void dispose() {
     // TODO: implement dispose
-    controller.dispose();
+    
     super.dispose();
+    controller.dispose();
+    controller.stopCamera();
   }
 
   @override
@@ -61,9 +63,10 @@ class _ScanQrState extends State<ScanQr> {
                   this.barcode = barcode;
                 });
                 controller.pauseCamera();
+                controller.stopCamera();
                   Navigator.of(context).push(
     MaterialPageRoute(
-      builder: (context) =>  QrResult(barcode),
+      builder: (context) =>  QrResult(barcode.code),
     ),
   );
               });
