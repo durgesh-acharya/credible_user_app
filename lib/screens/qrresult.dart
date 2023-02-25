@@ -3,6 +3,8 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:credible_steel/screens/dashboard.dart';
+import 'package:credible_steel/screens/invalidqr.dart';
+import 'package:credible_steel/screens/validqr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
@@ -26,10 +28,11 @@ class _QrResultState extends State<QrResult> {
       if(jsondata[0]["status"] == true){
         var jdata = jsondata[0]["data"];
         print(jdata);
-      print("yay");
+        Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context)=> ValidQr(jdata)));
       
       }else{
-      print("no");
+      // geterrorbox();
+      Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context)=> InvalidQr()));
       }
 
     }on SocketException{
@@ -44,11 +47,24 @@ class _QrResultState extends State<QrResult> {
     }
   }
 
+  Future geterrorbox()async{
+    return showDialog(context: context, builder: (context){
+      return AlertDialog(
+        title: Text("Invalid Qr!"),
+        actions: [
+          TextButton(onPressed: (){
+            Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context)=> InvalidQr()));
+          }, child: Text("Okay !"))
+        ],
+      );
+    });
+  }
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    controller?.stopCamera();
+    // controller?.stopCamera();
     Future.delayed(Duration(seconds: 2),(){
        getbarcoddata(widget.barcode);
     });
@@ -60,21 +76,7 @@ class _QrResultState extends State<QrResult> {
       onWillPop: () async => false,
       child: Scaffold(
         body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Container(
-          child: Text(widget.barcode.toString()),
-      ),
-      ElevatedButton(onPressed: (){
-      //     Navigator.of(context).push(
-      // MaterialPageRoute(
-      //     builder: (context) =>  DashBoard(),
-      // ));
-     
-      }, child: Text("Go to Home"))
-            ],
-          ),
+          child: CircularProgressIndicator(color: Colors.green,)
         ),
       ),
     );
