@@ -6,6 +6,7 @@ import 'package:credible_steel/screens/signup.dart';
 import 'package:credible_steel/utils.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 import 'package:pinput/pinput.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
@@ -131,6 +132,13 @@ class _OTPScreenState extends State<OTPScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+             Lottie.asset(
+                'assets/animation/otpr.json',
+                height: 200,
+                fit: BoxFit.cover,
+                repeat: true
+              ),
+              SizedBox(height : 15.0),
             Text("OTP has been sent to ${widget._mobilenumber}.",style: TextStyle(fontSize: 16.0,fontWeight: FontWeight.bold),),
             SizedBox(height: 35.0,),
             pinput(),
