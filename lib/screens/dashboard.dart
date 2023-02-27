@@ -49,7 +49,7 @@ class _DashBoardState extends State<DashBoard> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text("Credible Steel",style: GoogleFonts.fredokaOne(color: Colors.white,fontWeight: FontWeight.bold),),
+        title: Text("E Square",style: GoogleFonts.fredokaOne(color: Colors.white,fontWeight: FontWeight.bold),),
       ),
       body: WillPopScope(
         onWillPop: () {

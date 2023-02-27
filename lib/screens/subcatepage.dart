@@ -195,7 +195,7 @@ class _SubCatePageState extends State<SubCatePage> {
       appBar: AppBar(
         centerTitle: true,
         leading: BackButton(color: Colors.white),
-        title: Text("Credible Steel",style: GoogleFonts.fredokaOne(color: Colors.white,fontWeight: FontWeight.bold),),
+        title: Text("E Square",style: GoogleFonts.fredokaOne(color: Colors.white,fontWeight: FontWeight.bold),),
       ),
       body: Stack(children: [
           // when data

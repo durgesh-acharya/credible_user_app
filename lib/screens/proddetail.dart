@@ -197,7 +197,7 @@ Future getsimilarProduct(int prodid,int cateid, int subcateid)async{
       appBar: AppBar(
          centerTitle: true,
         leading: BackButton(color: Colors.white),
-        title: Text("Credible Steel",style: GoogleFonts.fredokaOne(color: Colors.white,fontWeight: FontWeight.bold),),
+        title: Text("E Square",style: GoogleFonts.fredokaOne(color: Colors.white,fontWeight: FontWeight.bold),),
       ),
       body: SingleChildScrollView(
         physics: AlwaysScrollableScrollPhysics(),
