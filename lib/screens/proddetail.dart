@@ -1,4 +1,4 @@
-// @dart=2.9
+
 import 'dart:convert';
 import 'dart:io';
 
@@ -165,8 +165,8 @@ Future getsimilarProduct(int prodid,int cateid, int subcateid)async{
                                 width: double.infinity,
                                
                                 child: Shimmer.fromColors(
-                                   baseColor: Colors.grey[700],
-                                  highlightColor: Colors.grey[500]
+                                   baseColor: Colors.grey[700]!,
+                                  highlightColor: Colors.grey[500]!, child: Placeholder(),
                                 ),
                               );
                             }),
@@ -393,8 +393,8 @@ Future getsimilarProduct(int prodid,int cateid, int subcateid)async{
                                   width: double.infinity,
                                  
                                   child: Shimmer.fromColors(
-                                     baseColor: Colors.grey[700],
-                                    highlightColor: Colors.grey[500]
+                                     baseColor: Colors.grey[700]!,
+                                    highlightColor: Colors.grey[500]!, child: Placeholder(),
                                   ),
                                 );
                               }),

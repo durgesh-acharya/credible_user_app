@@ -21,7 +21,6 @@ class _AccountsState extends State<Accounts> {
 String madeby;
 
 
-bool loadervisible = true;
 
      //get key
 Future getkey()async{
@@ -81,10 +80,7 @@ Widget card(int reedemid, double rupees,int rrstatus,String tranid){
         return jdata.map((json) => Reedem.fromJson(json)).toList();
       
       }else{
-        setState(() {
-         
-          loadervisible = false;
-        });
+       
       }
     }on HttpException{
       print("http");
@@ -101,29 +97,29 @@ Widget card(int reedemid, double rupees,int rrstatus,String tranid){
   Widget build(BuildContext context) {
     return Scaffold(
      
-      body: Stack(
-        children: [
-          //when data
-          FutureBuilder(
+      body: FutureBuilder(
             future: getreedemrequest(madeby),
             builder: (BuildContext context,AsyncSnapshot snapshot){
-              if(!snapshot.hasData){
-                return Visibility(
-                visible: loadervisible,
-                child: Center(child: CircularProgressIndicator(color: Colors.green,)
-                      ),
-              );
-              }
-            
-              return  ListView.builder(
+              if(snapshot.connectionState == ConnectionState.waiting){
+                return Center(child: CircularProgressIndicator(color: Colors.green,),);
+              }else if(snapshot.connectionState == ConnectionState.done){
+                if(snapshot.hasData){
+                  return  ListView.builder(
                 itemCount: snapshot.data.length == 0 ? 0 : snapshot.data.length,
                 itemBuilder:(BuildContext context, int index){
                   return card(snapshot.data[index].rrId,snapshot.data[index].qrRupees.toDouble(),snapshot.data[index].rrStatus,snapshot.data[index].rrTranid);
                 });
+                }else if(snapshot.hasError){
+                   return Center(child: Text("Something went wrong!!"),);
+                }else{
+                  return Center(child: Text("No Redeem Requests to show!"),);
+                } 
+              }else{
+                return Center(child: Text("Something went wrong!!"),);
+              } 
             }),
     
-        ],
-      ),
+        
     );
   }
 
